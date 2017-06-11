@@ -2,46 +2,34 @@
 
 ## Writeup Template
 
-### You can use this file as a template for your writeup if you want to submit it as a markdown file. But feel free to use some other method and submit a pdf if you prefer.
-
----
 
 **Finding Lane Lines on the Road**
 
-The goals / steps of this project are the following:
-* Make a pipeline that finds lane lines on the road
-* Reflect on your work in a written report
+To find the Lane Lines on the road, I used the same methods as given during the lessons & exercises as part of lessons. 
+Similar to the lessons, I first took the grayscale of color image, applied gaussian blur, then canny edge detection.
+The region definition also used similar to lesson exercises. Hough lines & weighted image functions also were just a process of making helper functions.
+Some of the thresholds had to be change through experimentation. 
 
-
-[//]: # (Image References)
-
-[image1]: ./examples/grayscale.jpg "Grayscale"
-
----
 
 ### Reflection
 
 ### 1. Describe your pipeline. As part of the description, explain how you modified the draw_lines() function.
 
-My pipeline consisted of 5 steps. First, I converted the images to grayscale, then I .... 
-
-In order to draw a single line on the left and right lanes, I modified the draw_lines() function by ...
-
-If you'd like to include images to show how the pipeline works, here is how to include an image: 
-
-![alt text][image1]
+Most of the pipeline to find lines & get ROI worked right away. I was stuck for a little while in the modification to draw_lines for extrapolation / averaging. 
+The logic in draw lines for extrapolation/ averaging is as follows : For all the lines found in the region of interest, only the ones with certain slope are only considered, and rest are ignored.
+Assumption is that the lines in this slope ranges are the lane lines. All of these lines are then averaged, and a line from the bottom of the picture is drawn with the slope of this averaged line, and a common point. 
 
 
 ### 2. Identify potential shortcomings with your current pipeline
 
-
-One potential shortcoming would be what would happen when ... 
-
-Another shortcoming could be ...
+This logic assumes that lanes are always in certain slope. That may not always be the case. 
+This also assumes that the lane markings work for the two cases that we are tasked with. However, if the lighting conditions, or roads coloring/contrast change - then the logic would have to be re-validated again.
+Also the image size is considered a constant - So if the camera changed - that would be an issue. 
 
 
 ### 3. Suggest possible improvements to your pipeline
 
-A possible improvement would be to ...
-
-Another potential improvement could be to ...
+Current code can be improved by dynamically adjusting various parameters to ensure that lanes are always found. Making it such would work for various light & contrast scenarios. 
+Also the image size can be made variable. 
+Looking for perpendecular lines are of use too.. To find intersections. 
+I am not sure if finding intersections is a separate piece of logic in practice. 
