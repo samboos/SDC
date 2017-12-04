@@ -1,0 +1,54 @@
+Find below description of the major points of the project 
+
+The training, validation amd testing files were provided in pickle files.
+I copied many parts of this project from the CarND-LeNet Lab Solution. Using that as a start point. 
+Along the way, there were some good ideas to represent data on the web that I used (Thanks to the world wide web !!) 
+First I displayed 
+-Number of training examples
+-Number of testing examples
+-Image data shape
+-Number of unique classes/labels
+
+This was just for me to get a wrap around the size of the data.
+
+It was also important, as pointed by the next suggestion to visualize the labels along with the images. Always a good idea to know the data set.
+It would have been impractical to print all, so I displayed only a subset. matplotlib seems to be a common way to display. 
+I also found that people use a slightly better library called seaborn.
+Using seaborn, I displayed each label, and number of data points.This essentially shows that some of the labels have more data associated with it. Speed limit(50km/h) has the most followed by 30km/h, etc.
+
+Next before training the data, a bit of pre-processing.
+I tried a few things here. 
+
+Moving on to the Model Architecture, it is similar to the LeNt-Lab-Solution, but a bit different. Layers are as below : 
+Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x48.
+Activation - RelU
+Pooling. Input = 28x28x48. Output = 14x14x48.
+Layer 2: Convolutional Layer. Output = 10x10x96
+Activation - RelU
+Pooling. Input = 10x10x96. Output = 5x5x96.
+Layer 3 : Convolution Input = 5x5x96. Output = 3x3x172 
+Pooling. Input = 3x3x172. Output = 2x2x172.
+Flatten
+Fully Connected. Input = 688. Output = 84
+Fully Connected. Input = 84. Output = 43
+
+
+Next Up was training. 
+I tried various Batch sizes ( 64, 128, 256 ), Epoch sizes ( 20,50,10)
+Epoch of 20 & batch size of 128 seemed optimal. After 20 epochs, I didnt see too much of an improvement.
+Also batch size of 64 & 256 either did not reach the same accuracy, or couldnt stabilize the accuracy. 
+
+After successfully training the neural network, Step 3 asked to test model on new images.
+To do so, I had to find some png images. I had to label them manually, and display them first to get some bearing myself. 
+
+Running a prediction on these images gave me a 83% accuracy. In other words, it got one out of 6 wrong. 
+
+
+
+
+Data Summary 
+
+
+Describe Model Architecture 
+Model training process - how did I conclude
+
