@@ -45,10 +45,3 @@ Running a prediction on these images gave me a 83% accuracy. In other words, it 
 
 
 
-
-Data Summary 
-
-
-Describe Model Architecture 
-Model training process - how did I conclude
-
