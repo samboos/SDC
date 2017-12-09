@@ -17,7 +17,10 @@ I also found that people use a slightly better library called seaborn.
 Using seaborn, I displayed each label, and number of data points.This essentially shows that some of the labels have more data associated with it. Speed limit(50km/h) has the most followed by 30km/h, etc.
 
 Next before training the data, a bit of pre-processing.
-I tried a few things here. 
+I tried a few things here.
+I used 2 separate functions to preprocess the data, one to display the images, and other to preprocess the dataset.
+To display the image, I used grayscale, which used cv library's cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) call. This is a standard call in cv.
+To process, I used the normalize function. Normalizing the 255 bit number(entire image array) -0.5 to 0.5 helps in training the data better, and is a very standard normalization technique used. 
 
 Moving on to the Model Architecture, it is similar to the LeNt-Lab-Solution, but a bit different. Layers are as below : 
 Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x48.
@@ -32,6 +35,25 @@ Flatten
 Fully Connected. Input = 688. Output = 84
 Fully Connected. Input = 84. Output = 43
 
+Based on feedback ( Note to myself - make notes as I am doing the project. I have been working on this for over a few months due to lack of time ) 
+
+I started with the original LeNet. I could not get accuracy above 89% applying the LeNet to this particular problem. I chose the LeNet, as that was taught in the program. Also, I had sample code available.
+
+The original Neural network had the following layers :
+Layer 1: Convolutional. Input = 32x32x1. Output = 28x28x6.
+Activation RelU
+Pooling. Input = 28x28x6. Output = 14x14x6
+Layer 2: Convolutional. Output = 10x10x16
+Activation RelU
+Pooling. Input = 10x10x16. Output = 5x5x16
+Flatten. Input = 5x5x16. Output = 400
+Layer 3: Fully Connected. Input = 400. Output = 120
+Activation RelU
+Layer 4: Fully Connected. Input = 120. Output = 84
+Activation RelU
+Layer 5: Fully Connected. Input = 84. Output = 10
+
+I modified the above since input shape was different ( 32X32X3 ). I also added More convolution layers & experimented with the network, training, and looped back before I settled on the network in the solution. 
 
 Next Up was training. 
 I tried various Batch sizes ( 64, 128, 256 ), Epoch sizes ( 20,50,10)
@@ -43,5 +65,12 @@ To do so, I had to find some png images. I had to label them manually, and displ
 
 Running a prediction on these images gave me a 83% accuracy. In other words, it got one out of 6 wrong. 
 
+Discussion is made as to particular qualities of the images or traffic signs in the images that are of interest, such as whether they would be difficult for the model to classify.
 
+Convolution Neural Networks, multiple layers are used so that different layers can identify different shapes. This is not a precise science. It is a tuning process. What we have trained is pretty good data set, but not a 100% yet. In real life, image classification is not the only input to a Self Driving car, its a combination of multiple factors. 
+Looking at the images I have chosen - 30km/h, has a Red circle, and a wiggly letter in middle ( resembling 3 ) --> easier to identify
+Same applies for arrows, big shapes, exclamation mark, etc.
+The net got confused with an empty circle - network must have confused it with a speed sign, which also has a circle, but something inside circle.
+
+Note : The second time I trained the network, it was slightly different - so observations maybe a bit different. 
 
